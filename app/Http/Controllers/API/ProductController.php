@@ -51,14 +51,19 @@ class ProductController extends Controller
 
     public function update(Request $request,$id){
         try { 
-            $data['name'] = $request['name'];
-            $data['description'] = $request['description'];
-            $data['price'] = $request['price'];
-            $data['stock'] = $request['stock'];
 
-            Product::find($id)->update($data);
+            $validated = $request->validate([
+                'name' => 'required|string|max:255',
+                'description' => 'required|string|max:255', 
+                'price' => 'required|numeric',
+                'stock' => 'required|integer|between:1,100000', 
+            ]);
+
+            Product::find($id)->update($validated);
             $res = Product::find($id);
             return response()->json( $res , 200);
+        } catch (ValidationException $e) {
+            return response()->json(['status' => 'error', 'message' => 'Error de validación', 'errors' => $e->errors()], 422);
         } catch (\Throwable $th) {
             return response()->json([ 'error' => $th->getMessage()], 500);
         }
