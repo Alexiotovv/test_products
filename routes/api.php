@@ -29,9 +29,9 @@ Route::prefix('v1/persons')->group(function () {
 });
 
 Route::prefix('v1/products')->group(function () {
-    Route::get('/',[ PersonController::class, 'get']);
-    Route::post('/',[ PersonController::class, 'create']);
-    Route::get('/{id}',[ PersonController::class, 'getById']);
-    Route::put('/{id}',[ PersonController::class, 'update']);
-    Route::delete('/{id}',[ PersonController::class, 'delete']);
+    Route::get('/',[ ProductController::class, 'get']);
+    Route::post('/',[ ProductController::class, 'create']);
+    Route::get('/{id}',[ ProductController::class, 'getById']);
+    Route::put('/{id}',[ ProductController::class, 'update']);
+    Route::delete('/{id}',[ ProductController::class, 'delete']);
 });
