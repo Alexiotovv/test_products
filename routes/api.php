@@ -21,17 +21,18 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::prefix('v1/persons')->group(function () {
-    Route::get('/',[ PersonController::class, 'get']);
-    Route::post('/',[ PersonController::class, 'create']);
-    Route::get('/{id}',[ PersonController::class, 'getById']);
-    Route::put('/{id}',[ PersonController::class, 'update']);
-    Route::delete('/{id}',[ PersonController::class, 'delete']);
+    Route::get('get/',[ PersonController::class, 'get']);
+    Route::post('create/',[ PersonController::class, 'create']);
+    Route::get('getById/{id}',[ PersonController::class, 'getById']);
+    Route::put('update/{id}',[ PersonController::class, 'update']);
+    Route::delete('delete/{id}',[ PersonController::class, 'delete']);
 });
 
+
 Route::prefix('v1/products')->group(function () {
-    Route::get('/',[ ProductController::class, 'get']);
-    Route::post('/',[ ProductController::class, 'create']);
-    Route::get('/{id}',[ ProductController::class, 'getById']);
-    Route::put('/{id}',[ ProductController::class, 'update']);
-    Route::delete('/{id}',[ ProductController::class, 'delete']);
+    Route::get('/get',[ ProductController::class, 'get']);
+    Route::post('/create',[ ProductController::class, 'create']);
+    Route::get('getById/{id}',[ ProductController::class, 'getById']);
+    Route::put('update/{id}',[ ProductController::class, 'update']);
+    Route::delete('delete/{id}',[ ProductController::class, 'delete']);
 });

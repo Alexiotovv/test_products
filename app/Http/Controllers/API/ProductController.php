@@ -20,6 +20,8 @@ class ProductController extends Controller
     }
 
     public function create(Request $request){
+        
+        
         try {
 
             $validated = $request->validate([
@@ -28,13 +30,8 @@ class ProductController extends Controller
                 'price' => 'required|numeric',
                 'stock' => 'required|integer|between:1,100000', 
             ]);
-            
 
-            $data['name'] = $request['name'];
-            $data['description'] = $request['description'];
-            $data['price'] = $request['price'];
-            $data['stock'] = $request['stock'];
-            $res = Product::create($data);
+            $res = Product::create($validated);
             return response()->json( $res, 200);
         } catch (ValidationException $e) {
             return response()->json(['status' => 'error', 'message' => 'Error de validación', 'errors' => $e->errors()], 422);
